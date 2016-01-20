@@ -1,41 +1,79 @@
 # == Class: rundeck_rd_winrm_plugin
 #
-# Full description of class rundeck_rd_winrm_plugin here.
+# Installs the rd-winrm-plugin Rundeck WinRM plugin and dependencies.
+#   This module assumes that Rundeck is already installed (either from
+#   manual steps or using a puppet modules such as 'puppet/rundeck').
+#
+#   The list of installed components include the following:
+#     - OS Packages: make, ruby, ruby-devel, rubygems
+#     - Ruby Gems: winrm, winrm-fs
+#     - Rundeck Plugins: rd-winrm-plugin-x.x.x.zip
+#
+#   Installation of the plugin and dependencies is done from module-local files.
+#   These files are located in the files/gems and files/plugins directories.
+#
+#   You can add additional local versions of the plugin by cd'ing to
+#   the 'files' directory within the module and running
+#   ./download_setup_files.sh and passing the plugin version as a parameter.
+#     eg. ./download_setup_files.sh '1.3.2'
+#   The above example would download 'rd-winrm-plugin-1.3.2.zip' to the
+#   'files/plugins' directory. You can then use the downloaded plugin version by
+#   specifiying it as a value to the 'rd_winrm_plugin_version' class parameter.
 #
 # === Parameters
 #
-# Document parameters here.
+# [*rd_winrm_plugin_version*]
+#   Specifiy the locally stored version of the plugin to install.
+#   Default value: '1.3.2'
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*rundeck_plugins_dir*]
+#   Specifiy the plugins directory for the Rundeck installation.
+#   Default value: '/var/lib/rundeck/libext'
 #
-# === Variables
+# [*rundeck_user*]
+#   Specifiy the user that Rundeck runs as on the server.
+#   Default value: 'rundeck'
 #
-# Here you should define a list of variables that this module would require.
+# [*rundeck_group*]
+#   Specifiy the group that Rundeck runs as on the server.
+#   Default value: 'rundeck'
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
+# [*rd_winrm_plugin_packages*]
+#   Specifiy an array of dependent packages to be installed.
+#   Default value: [ 'make', 'ruby' 'ruby-devel', 'rubygems' ]
 #
 # === Examples
 #
+#  class { 'rundeck_rd_winrm_plugin': }
+#
 #  class { 'rundeck_rd_winrm_plugin':
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#    rd_winrm_plugin_version => '1.3.2',
+#    rundeck_plugins_dir     => '/path/to/custom/plugins/directory',
 #  }
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Rory Bramwell <rory.bramwell@gmail.com>
 #
 # === Copyright
 #
-# Copyright 2016 Your name here, unless otherwise noted.
+# Copyright 2016 Rory Bramwell.
 #
-class rundeck_rd_winrm_plugin {
+class rundeck_rd_winrm_plugin (
+  $rd_winrm_plugin_version  = $rundeck_rd_winrm_plugin::params::plugin_version,
+  $rundeck_plugins_dir      = $rundeck_rd_winrm_plugin::params::rundeck_plugins_dir,
+  $rundeck_user             = $rundeck_rd_winrm_plugin::params::rundeck_user,
+  $rundeck_group            = $rundeck_rd_winrm_plugin::params::rundeck_group,
+  $rd_winrm_plugin_packages = $rundeck_rd_winrm_plugin::params::rd_winrm_plugin_packages,
+) inherits rundeck_rd_winrm_plugin::params {
 
+  validate_string($rd_winrm_plugin_version)
+  validate_absolute_path($rundeck_plugins_dir)
+  validate_string($rundeck_user)
+  validate_string($rundeck_group)
+  validate_array($rd_winrm_plugin_packages)
+
+  class { '::rundeck::install': } ->
+  Class['rundeck_rd_winrm_plugin']
 
 }
