@@ -1,0 +1,14 @@
+{
+  "name": "rbramwell-rundeck_rd_winrm_plugin",
+  "version": "0.1.0",
+  "author": "Rory Bramwell <bramwell@pythian.com>",
+  "summary": "Installs the rd-winrm-plugin Rundeck WinRM plugin and dependencies",
+  "license": "Apache 2.0",
+  "source": "https://github.com/rbramwell/rbramwell-rundeck_rd_winrm_plugin",
+  "project_page": "https://github.com/rbramwell/rbramwell-rundeck_rd_winrm_plugin",
+  "issues_url": "https://github.com/rbramwell/rbramwell-rundeck_rd_winrm_plugin/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
