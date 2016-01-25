@@ -48,14 +48,16 @@ specifiying it as a value to the 'rd_winrm_plugin_version' class parameter.
 ### Beginning with rundeck_rd_winrm_plugin
 
 The very basic steps needed for a user to get the module up and running:
-
+~~~
 class { 'rundeck_rd_winrm_plugin': }
-
+~~~
+OR
+~~~
 class { 'rundeck_rd_winrm_plugin':
   rd_winrm_plugin_version => '1.3.2',
   rundeck_plugins_dir     => '/path/to/custom/plugins/directory',
 }
-
+~~~
 ## Usage
 
 ###Classes and Defined Types
