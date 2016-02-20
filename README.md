@@ -35,7 +35,7 @@ The list of installed components include the following:
 Installation of the plugin and dependencies is done from module-local files.
 These files are located in the files/gems and files/plugins directories.
 
-### Setup Requirements (OPTIONAL)
+### Setup Requirements
 
 You can add additional local versions of the plugin by running the
 download script and passing the plugin version as a parameter.
