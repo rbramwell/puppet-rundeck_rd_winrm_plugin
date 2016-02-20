@@ -37,10 +37,11 @@ These files are located in the files/gems and files/plugins directories.
 
 ### Setup Requirements **OPTIONAL**
 
-You can add additional local versions of the plugin by cd'ing to
-the 'files' directory within the module and running
-./download_setup_files.sh and passing the plugin version as a parameter.
-  eg. ./download_setup_files.sh '1.3.2'
+You can add additional local versions of the plugin by running the
+download script and passing the plugin version as a parameter.
+~~~
+./files/download_setup_files.sh '1.3.2'
+~~~
 The above example would download 'rd-winrm-plugin-1.3.2.zip' to the
 'files/plugins' directory. You can then use the downloaded plugin version by
 specifiying it as a value to the 'rd_winrm_plugin_version' class parameter.
