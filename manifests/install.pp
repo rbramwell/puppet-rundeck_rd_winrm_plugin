@@ -35,7 +35,7 @@ class rundeck_rd_winrm_plugin::install (
     command => 'bash -c \'for GEM in $(ls *.gem) ; do gem install $GEM --local --force --ignore-dependencies --no-ri --no-rdoc ; done\'',
     cwd     => $rundeck_rd_winrm_plugin::params::local_tmp_gems_dir,
     path    => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
-    unless  => "/usr/bin/test -f ${plugin_dir}/rd-winrm-plugin-${plugin_version}.zip",
+    unless  => "/usr/bin/test -f ${rundeck_plugins_dir}/rd-winrm-plugin-${plugin_version}.zip",
   }->
 
   # Ensure plugins directory is present
@@ -44,7 +44,7 @@ class rundeck_rd_winrm_plugin::install (
     path    => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
     creates => $rundeck_plugins_dir,
   }->
-  
+
   # Copy plugin to Rundeck plugins directory
   file { 'download rd-winrm-plugin zip file':
     ensure => present,
