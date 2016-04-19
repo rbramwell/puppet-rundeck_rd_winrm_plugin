@@ -15,7 +15,9 @@
 
 ## Overview
 
-This module installs the rd-winrm-plugin Rundeck WinRM plugin and dependencies.
+This module installs the rd-winrm-plugin Rundeck WinRM plugin and dependencies
+from [https://github.com/NetDocuments/rd-winrm-plugin][1].
+[1]: https://github.com/NetDocuments/rd-winrm-plugin
 
 ## Module Description
 
