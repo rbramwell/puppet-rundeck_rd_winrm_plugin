@@ -38,6 +38,13 @@ class rundeck_rd_winrm_plugin::install (
     unless  => "/usr/bin/test -f ${plugin_dir}/rd-winrm-plugin-${plugin_version}.zip",
   }->
 
+  # Ensure plugins directory is present
+  exec { 'create rundeck plugins directory':
+    command => "mkdir -p ${rundeck_plugins_dir}",
+    path    => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
+    creates => $rundeck_plugins_dir,
+  }->
+  
   # Copy plugin to Rundeck plugins directory
   file { 'download rd-winrm-plugin zip file':
     ensure => present,
