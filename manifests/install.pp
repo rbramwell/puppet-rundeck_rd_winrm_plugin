@@ -32,7 +32,7 @@ class rundeck_rd_winrm_plugin::install (
 
   # Install winrm ruby gems and dependencies
   exec { 'install winrm ruby gems':
-    command => 'for GEM in $(ls *.gem) ; do ; puppetserver gem install $GEM --local --force --ignore-dependencies --no-ri --no-rdoc ; done',
+    command => 'bash -c \'for GEM in $(ls *.gem) ; do gem install $GEM --local --force --ignore-dependencies --no-ri --no-rdoc ; done\'',
     cwd     => $rundeck_rd_winrm_plugin::params::local_tmp_gems_dir,
     path    => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
     unless  => "/usr/bin/test -f ${plugin_dir}/rd-winrm-plugin-${plugin_version}.zip",
