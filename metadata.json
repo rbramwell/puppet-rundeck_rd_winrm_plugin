@@ -1,6 +1,6 @@
 {
   "name": "rbramwell-rundeck_rd_winrm_plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Rory Bramwell <rory.bramwell@gmail.com>",
   "summary": "Installs the rd-winrm-plugin Rundeck WinRM plugin and dependencies",
   "license": "Apache 2.0",
