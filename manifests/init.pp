@@ -18,11 +18,11 @@
 #     eg. ./download_setup_files.sh '1.3.2'
 #   The above example would download 'rd-winrm-plugin-1.3.2.zip' to the
 #   'files/plugins' directory. You can then use the downloaded plugin version by
-#   specifiying it as a value to the 'rd_winrm_plugin_version' class parameter.
+#   specifiying it as a value to the 'plugin_version' class parameter.
 #
 # === Parameters
 #
-# [*rd_winrm_plugin_version*]
+# [*plugin_version*]
 #   Specifiy the locally stored version of the plugin to install.
 #   Default value: '1.3.2'
 #
@@ -38,7 +38,7 @@
 #   Specifiy the group that Rundeck runs as on the server.
 #   Default value: 'rundeck'
 #
-# [*rd_winrm_plugin_packages*]
+# [*plugin_packages*]
 #   Specifiy an array of dependent packages to be installed.
 #   Default value: [ 'make', 'ruby' 'ruby-devel', 'rubygems' ]
 #
@@ -47,8 +47,8 @@
 #  class { 'rundeck_rd_winrm_plugin': }
 #
 #  class { 'rundeck_rd_winrm_plugin':
-#    rd_winrm_plugin_version => '1.3.2',
-#    rundeck_plugins_dir     => '/path/to/custom/plugins/directory',
+#    plugin_version      => '1.3.2',
+#    rundeck_plugins_dir => '/path/to/custom/plugins/directory',
 #  }
 #
 # === Authors
@@ -60,18 +60,18 @@
 # Copyright 2016 Rory Bramwell.
 #
 class rundeck_rd_winrm_plugin (
-  $rd_winrm_plugin_version  = $rundeck_rd_winrm_plugin::params::plugin_version,
-  $rundeck_plugins_dir      = $rundeck_rd_winrm_plugin::params::rundeck_plugins_dir,
-  $rundeck_user             = $rundeck_rd_winrm_plugin::params::rundeck_user,
-  $rundeck_group            = $rundeck_rd_winrm_plugin::params::rundeck_group,
-  $rd_winrm_plugin_packages = $rundeck_rd_winrm_plugin::params::rd_winrm_plugin_packages,
+  $plugin_version      = $rundeck_rd_winrm_plugin::params::plugin_version,
+  $rundeck_plugins_dir = $rundeck_rd_winrm_plugin::params::rundeck_plugins_dir,
+  $rundeck_user        = $rundeck_rd_winrm_plugin::params::rundeck_user,
+  $rundeck_group       = $rundeck_rd_winrm_plugin::params::rundeck_group,
+  $plugin_packages     = $rundeck_rd_winrm_plugin::params::plugin_packages,
 ) inherits rundeck_rd_winrm_plugin::params {
 
-  validate_string($rd_winrm_plugin_version)
+  validate_string($plugin_version)
   validate_absolute_path($rundeck_plugins_dir)
   validate_string($rundeck_user)
   validate_string($rundeck_group)
-  validate_array($rd_winrm_plugin_packages)
+  validate_array($plugin_packages)
 
   class { '::rundeck::install': } ->
   Class['rundeck_rd_winrm_plugin']

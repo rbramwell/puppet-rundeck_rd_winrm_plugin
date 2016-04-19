@@ -5,7 +5,7 @@ class rundeck_rd_winrm_plugin::params {
   # Default parameters
   case $::osfamily {
     'Debian': {
-      $rd_winrm_plugin_packages = [
+      $plugin_packages = [
         'make',
         'ruby',
         'ruby-dev',
@@ -13,7 +13,7 @@ class rundeck_rd_winrm_plugin::params {
       ]
     }
     'RedHat', 'Amazon': {
-      $rd_winrm_plugin_packages = [
+      $plugin_packages = [
         'make',
         'ruby',
         'ruby-devel',
@@ -25,9 +25,9 @@ class rundeck_rd_winrm_plugin::params {
     }
   }
 
-  $rd_winrm_plugin_version = '1.3.2'
-  $rundeck_plugins_dir     = '/var/lib/rundeck/libext'
-  $rundeck_user            = 'rundeck'
-  $rundeck_group           = 'rundeck'
-  $local_tmp_gems_dir      = '/tmp/rundeck/rd-winrm-plugin/gems'
+  $plugin_version      = '1.3.2'
+  $rundeck_plugins_dir = '/var/lib/rundeck/libext'
+  $rundeck_user        = 'rundeck'
+  $rundeck_group       = 'rundeck'
+  $local_tmp_gems_dir  = '/tmp/rundeck_rd-winrm-plugin_gems'
 }
